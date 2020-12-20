@@ -1,19 +1,32 @@
-file = open("day19.txt")
+import regex as reg
+file = open("ex.txt")
 data = file.read().split('\n\n')
 file.close()
 rules = data[0].split('\n')
 msgs = data[1].split('\n')[:-1]
-rulemap = {int(rule.split(':')[0]) : rule.split(':')[1] for rule in rules}
-for key in rulemap:
-    l1 = [[int(i) if i.isdigit() else i[1] for i in e.split(' ') if i] for e in rulemap[key].split('|')]
-    rulemap[key] = l1
-def propogate(rule):
-    #return [[propogate(val) if type(val)==int else val for val in set] for set in rulemap[rule]]
-    if len(rulemap[rule]) == 1:
-        if len(rulemap[rule][0]) == 1:
-        return "(" + propogate(rulemap[rule][0][0]) + " and " + propogate(rulemap[rule][0]) + ")"
-    elif len(rulemap[rule]) == 2:
-        return propogate(rulemap[rule][0]) + " or " + propogate(rulemap[rule][1])
-[print(rule, ':', rulemap[rule]) for rule in rulemap]
-zerorule = propogate(0)
-print(zerorule)
+rulemap = {int(rule.split(': ')[0]) : rule.split(': ')[1] for rule in rules}
+def propogate(rule)->str:
+    nums = rulemap[rule].split(' ')
+    s = ""
+    for n in nums:
+        n2 = n if n[-1] != '+' else n[:-1]
+        try:
+            N = int(n2)
+            if N != rule:
+                s += propogate(N)
+            else:
+                s += "(?1)*"
+        except:
+            s += n2
+        if n[-1] == '+': s += '+'
+    if '|' in nums: s = '(' + s + ')'
+    return s.replace('"', '')
+zerorule = "^" + propogate(0) + "$"
+#"42 | 42 8", "42 31 | 42 11 31"
+rulemap[8], rulemap[11] = "42+", "42 11 31"
+zero2 = "^" + propogate(0) + "$"
+print("\n1: " + zerorule)
+print("\n2: " + zero2)
+print("\nPart 1: " + str(sum([1 if reg.search(zerorule, m) else 0 for m in msgs])))
+print("Part 2: " + str(sum([1 if reg.search(zero2, m) else 0 for m in msgs])))
+[print("Yes: " + m) if reg.search(zero2, m) else 0 for m in msgs]
