@@ -3,6 +3,7 @@ def pt1(lst1: list[int], lst2: list[int]) -> int:
     assert len(sort1) == len(sort2)
     return sum([abs(pair[0] - pair[1]) for pair in zip(sort1, sort2)])
 
+
 def pt2(left: list[int], right: list[int]) -> int:
     counts, total = {}, 0
     for l in left:
@@ -10,6 +11,7 @@ def pt2(left: list[int], right: list[int]) -> int:
             counts[l] = right.count(l)
         total += l*counts[l]
     return total
+
 
 def main():
     with open("../../inputs/day1.txt", "r") as f:
