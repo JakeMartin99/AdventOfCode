@@ -31,7 +31,7 @@ def pt2(reports: list[list[int]]) -> int:
 
 
 def main():
-    with open("../../inputs/day2.txt", "r") as f:
+    with open("../../inputs/aoc2024/day2.txt", "r") as f:
         reports = [list(map(int, line.strip().split(" "))) for line in f.readlines()]
     print("Pt 1:", pt1(reports))
     print("Pt 2:", pt2(reports))

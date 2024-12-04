@@ -14,7 +14,7 @@ def pt2(left: list[int], right: list[int]) -> int:
 
 
 def main():
-    with open("../../inputs/day1.txt", "r") as f:
+    with open("../../inputs/aoc2024/day1.txt", "r") as f:
         lst = [tuple(map(int, line.strip().split("   "))) for line in f.readlines()]
         left, right = [p[0] for p in lst], [p[1] for p in lst]
     print("Pt 1:", pt1(left, right))

@@ -22,7 +22,7 @@ def pt2(instr: str) -> int:
 
 
 def main():
-    with open("../../inputs/day3.txt", "r") as f:
+    with open("../../inputs/aoc2024/day3.txt", "r") as f:
         instr = "".join([line for line in f.readlines()])
     print("Pt 1:", pt1(instr))
     print("Pt 2:", pt2(instr))

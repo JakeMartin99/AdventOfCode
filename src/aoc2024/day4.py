@@ -46,7 +46,7 @@ def pt2(grid: list[list[chr]]) -> int:
 
 
 def main():
-    with open("../../inputs/day4.txt", "r") as f:
+    with open("../../inputs/aoc2024/day4.txt", "r") as f:
         grid = [list(line.strip()) for line in f.readlines()]
     print("Pt 1:", pt1(grid))
     print("Pt 2:", pt2(grid))
